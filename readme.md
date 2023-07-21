@@ -1,3 +1,5 @@
+# overleaf_latex
+
 ファイル構成
 1. main.tex:Latex文章本体のファイルです
 2. logo.png:文章中の画像ファイルです
@@ -5,5 +7,3 @@
 
 注意事項
 OverleafのMenuのCompilerの部分を「pdflatex」から「LaTeX」に゙変更してください．# overleaf_latex
-# overleaf_latex
-# overleaf_latex
