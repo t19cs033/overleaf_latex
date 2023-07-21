@@ -1,0 +1,164 @@
+\documentclass[uplatex,a4paper,twocolumn,twoside,10pt]{jsarticle}
+
+\usepackage[top=20truemm,bottom=20truemm,left=25truemm,right=25truemm]{geometry}
+\setlength{\columnsep}{8truemm}
+\setlength{\footskip}{10truemm}
+\setlength\intextsep{5pt}
+\setlength\textfloatsep{0pt}
+
+\usepackage{minted}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{lipsum}
+
+\makeatletter
+\def\@maketitle{% 
+\begin{center}% 
+{\LARGE \@title \par}% タイトル 
+\end{center}% 
+\begin{flushright}% 
+{\large \@date\\}% 著者 
+{\large \@author}% 日付
+\end{flushright}% 
+\par\vskip 1.5em
+}
+\makeatother
+
+\begin{document}
+
+\setlength{\baselineskip}{15pt}
+\setcounter{page}{1}
+%\hspace{10cm}
+\title{予稿テンプレート例}
+\author{鍋島研究室　T00CS000　佐藤　一}
+\date{2038/1/19(火)}
+\maketitle
+
+\section{はじめに}
+ローカル環境を構築したい場合は,TexLiveをインストールするのが良いと思います．VSCodeの拡張機能を導入することで開発環境が快適になる上，コマンドの管理などの設定も楽になります．オンライン環境の場合はOverLeafというオンラインエディタがおすすめです．パッケージ管理や，環境変数の設定など面倒な作業が必要なくなります．さらにアカウントを作成すると，自動でバックアップが行われるためファイル管理がしやすいです．しかし無料版の場合，コンパイルに時間がかかるという大きな欠点があります．
+以下\LaTeX の基本的な記法について解説します．
+
+\section{セクション}
+文書を論理的なブロックに分割するためにセクションを設けます．以下,セクションの例です.
+
+\subsection{サブセクション}
+サブセクションを使用して細かく分類することもできます．
+
+\section{文章の書式}
+LaTeXでは，文章の書式設定を行うためにコマンドや環境を使用します．以下，一般的な例です．
+
+\subsection{強調}
+文章中で特定の単語やフレーズを強調するには、\textbf{ボールド}などのスタイルを使います．
+
+\subsection{箇条書き}
+箇条書きを作成するためには、\texttt{itemize}環境や，\texttt{enumerate}環境を使います．
+\begin{itemize}
+  \item 項目1
+  \item 項目2
+  \item 項目3
+\end{itemize}
+
+\begin{enumerate}
+\item \texttt{enumerate}環境
+\begin{enumerate}
+  \item 項目1
+  \item 項目2
+  \item 項目3
+\end{enumerate}
+\end{enumerate}
+
+
+\subsection{数式}
+数式は，\texttt{equation}環境や\texttt{\$...\$}のようなインライン数式で記述できます．
+
+\begin{equation}
+  E = mc^2
+\end{equation}
+
+数式のあとに\texttt{\textbackslash notag}を追加すると，数式の番号が消せます．
+\begin{equation}
+  1+2+3+4+\ldots = -\frac{1}{12} \notag
+\end{equation}
+
+以下のような複雑な数式の画像をLatexの形式に変換したい場合は，Mathpixというオンラインツール\url{https://mathpix.com/}がおすすめです．
+
+\begin{equation}
+\frac{1}{\pi}=\frac{2 \sqrt{2}}{99^2} \sum_{n=0}^{\infty} \frac{(4 n) !}{n !^4} \frac{26390 n+1103}{396^{4 n}}
+\end{equation}
+
+\texttt{texttt}を利用することでソースコードをうまく表現できます．\\
+\begingroup
+\footnotesize
+\begin{equation}
+\begin{split}
+\texttt{\{ assign(N,D,S) : shift(S) \} = 1 :- day(D), nurse(N).}\notag
+\end{split}
+\end{equation}
+\endgroup
+
+\texttt{equation}内で，\texttt{split}を利用することで２段組で記述できます．\\
+\begingroup
+\footnotesize
+\begin{equation}
+\begin{split}
+\texttt{\{assign(N,X,D):shift(X,\_,\_)\} = 1}\\
+\texttt{:- day(D),nurse(N).} \notag
+\end{split}
+\end{equation}
+\endgroup
+
+\subsection{図}
+図を挿入するためには，\texttt{figure}環境を使用します．図表にはキャプションを付けることもできます．図の場合は，キャプションを図の下に書きます．\texttt{[ width=0.3 \textbackslash textwidth ]}で画像サイズをあわせます．
+
+\begin{figure}[ht]
+  \centering
+    \includegraphics[width=0.3\textwidth]{logo.png}
+  \caption{図の例}
+  \label{fig:example}
+\end{figure}
+
+\subsection{表}
+表を作成するには，\texttt{tabular}環境を使用します．\texttt{booktabs}パッケージを使用すると，よりきれいになります．表の場合は，キャプションを表の上に書きます．表の例として，図の配置指定方法を示します．\texttt{\textbackslash begin{table}[ht]}のように指定してください．
+
+\begin{table}[ht]
+  \centering
+  \caption{図の配置指定方法}
+  \label{tab:sample}
+  \begin{tabular}{llr}
+    \toprule
+    \textbf{指定文字} & \textbf{出力場所} \\
+    \midrule
+        h	& 記述した部分 \\
+        t	& ページの上部 \\
+        b	& ページの下部 \\
+        p	& 独立したページ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Lorem Ipsum}
+\lipsum[1-4]
+
+\section{おわりに}
+LaTeXの記法にはさまざまな機能がありますが，ここでは基本的な要素のみを紹介しました．参考文献は\texttt{bibliography}などを利用して記述します．別にbibのファイルで置く場合は以下のように記述します．卒業論文の場合などは体裁を整える必要があるので，そのままtexファイルに書いてしまうのが良いと思います．
+\begin{minted}{tex}
+\bibliographystyle{unsrt}
+{\tiny
+\bibliography{script}
+}
+\end{minted}
+
+\begin{thebibliography}
+\small
+
+\bibitem{Lowry1951}
+Lowry, H., Rosebrogh, N., Farr, A., Randall, R.: Protein measurement with the Folin phenol reagent, Journal of biological chemistry , Vol. 193, pp. 265-275 (1951).
+
+\end{thebibliography}
+
+\end{document}
