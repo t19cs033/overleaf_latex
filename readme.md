@@ -1,4 +1,4 @@
-# overleaf_latex
+# overleafでLaTeX日本語文書の作成
 
 ファイル構成
 1. main.tex：Latex文章本体のファイルです
